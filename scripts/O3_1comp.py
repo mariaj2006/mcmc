@@ -110,7 +110,9 @@ for x, y in zip(xx[s1:s2], yy[s1:s2]):
     print('x, y', x, y)
     print(flagmap[y,x])
     checkpath = 'mcmc/results/mc_%d_%d.fits' % (x, y) 
-    if path.exists(checkpath): continue
+    if path.exists(checkpath):
+        print('path already exists')
+        continue
     t0 = time.time()
     dataspec = data[:,y,x]
     errspec = err[:,y,x]
