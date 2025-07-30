@@ -47,14 +47,15 @@ loc_mask = np.zeros((322,324)) # do 2x2
 loc_mask[106:108,130:132] = 1
 tot_mask = np.full((322,324),np.nan)
 
+'''
 for x in range(324):
     for y in range(322):
         if (flagmap[y,x]>3) and (flagmap[y,x]<3.2):
             tot_mask[y,x] = True
         else:
             tot_mask[y,x] = False
-
-yy, xx = np.where(tot_mask) # change after
+'''
+yy, xx = np.where(flagmap>3) # change after
 print(len(yy))
 
 # remember to check how the mask is defined inside the fitting loop
@@ -101,7 +102,7 @@ def check_bound_global(pars):
         
     return f
 
-s1, s2 = (array_num-1)*10, array_num*10
+s1, s2 = (array_num-1)*400, array_num*400
 if s2>len(yy): s2 = len(yy)
 #print(xx[s1:s2])
 #print(yy[s1:s2])
