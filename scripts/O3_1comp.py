@@ -49,7 +49,7 @@ tot_mask = np.full((322,324),np.nan)
 
 for x in range(324):
     for y in range(322):
-        if (flagmap[y,x]>3) and (loc_mask[y,x]>0):
+        if (flagmap[y,x]>3) and (flagmap[y,x]<3.2):
             tot_mask[y,x] = True
         else:
             tot_mask[y,x] = False
@@ -101,7 +101,7 @@ def check_bound_global(pars):
         
     return f
 
-s1, s2 = (array_num-1)*50, array_num*50
+s1, s2 = (array_num-1)*10, array_num*10
 if s2>len(yy): s2 = len(yy)
 #print(xx[s1:s2])
 #print(yy[s1:s2])
@@ -153,11 +153,12 @@ for x, y in zip(xx[s1:s2], yy[s1:s2]):
 
     sampler = emcee.EnsembleSampler(nwalkers, ndim, lnpi_global)
     #run for a given nsteps
-    bad_pixels = []
+    #bad_pixels = []
     try: 
         sampler.run_mcmc(p, nsteps)
     except:
-        bad_pixels.append([x,y])
+        print(f'bad pixel: {x},{y}')
+        #bad_pixels.append([x,y])
         continue
     
     params = ['z','sig','amp']
@@ -190,6 +191,6 @@ for x, y in zip(xx[s1:s2], yy[s1:s2]):
     plt.show()
     
     fits.writeto(checkpath, sampler.chain.astype(np.float32),overwrite=True)
-np.save('bad_pixel.npy', bad_pixels)
+#np.save('bad_pixel.npy', bad_pixels)
 # plot the spectra of the pixels above the best fit params to see the accuracy visually
 # use model_display
