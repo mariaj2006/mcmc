@@ -1,0 +1,16 @@
+name: emcee_fitting # Choose a descriptive name for your environment
+channels:
+  - conda-forge # Often recommended for broader package availability and latest versions
+  - defaults    # The default Conda channel
+dependencies:
+  - python=3.9.6 # Specify the Python version your project needs
+  - numpy        # Example scientific computing library
+  - pandas       # Example data manipulation library
+  - matplotlib   # Example plotting library
+  - scikit-learn # Example machine learning library
+  - jupyterlab   # Useful for interactive development
+  - pip:         # Packages that are only available via pip (if any)
+    - requests
+    - astropy
+    - scipy
+    - emcee
