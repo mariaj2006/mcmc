@@ -4,8 +4,8 @@
 #SBATCH --time=10:00:00
 #SBATCH --array=1-100
 #SBATCH --mem=2G
-#SBATCH --output=out-array_%A_%a.out  
-#SBATCH --error=err-array_%A_%a.err  
+#SBATCH --output=slurm_output/out-array_%A_%a.out  
+#SBATCH --error=slurm_output/err-array_%A_%a.err  
 #SBATCH --partition=obs
 #SBATCH --ntasks=1
 
