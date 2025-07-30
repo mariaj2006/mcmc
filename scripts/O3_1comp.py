@@ -9,6 +9,7 @@ import sys
 from os import path
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
+#test
 '''
 sig/c = width of gaussian/lambda observed
 3:1 ratio for amplitudes
