@@ -33,9 +33,9 @@ def readcube(cubefile):
     return wave, data, err
 
 #cubefile = '../qsub_HRSDI_eso_w_cubexqso_cont_sub_v2_center_replaced_smoothed_sig1.5.fits'
-cubefile = 'mcmc_fitting/data/vac_cont_sub_mini.fits'
+cubefile = 'mcmc/data/vac_cont_sub_mini.fits'
 #flagmap = fits.getdata('../flagmap_3sig_OIII.fits')
-flagmap = fits.getdata('mcmc_fitting/data/SNR_OIII.fits')
+flagmap = fits.getdata('mcmc/data/SNR_OIII.fits')
 noise_scale_ratio = 1.32 # my number is approx. 1.3240177979590504, not 1.6
 
 #popt_prev = fits.getdata('/Users/mariasanchezrincon/CASSI_SURF/UGC7342_IFS_data/OIII_best_fit.fits')
@@ -68,7 +68,7 @@ z0 = 0.0477
 line_z = np.asarray(line)*(1+z0)
 
 # lsf = get_muse_lsf(line_z) # what is the purpose of this? rather:
-l0, r0 = np.loadtxt('mcmc_fitting/data/muse_lsf.dat',unpack=True)
+l0, r0 = np.loadtxt('mcmc/data/muse_lsf.dat',unpack=True)
 r = interp1d(l0, r0)(line_z)
 lsf = 2.998e5/r
 func = O3_1comp(line, lsf).model # does the .model make this into a function of some sort?
@@ -109,7 +109,7 @@ bad_pixels = []
 for x, y in zip(xx[s1:s2], yy[s1:s2]):
     print('x, y', x, y)
     print(flagmap[y,x])
-    checkpath = 'mcmc_fitting/results/mc_%d_%d.fits' % (x, y) 
+    checkpath = 'mcmc/results/mc_%d_%d.fits' % (x, y) 
     if path.exists(checkpath): continue
     t0 = time.time()
     dataspec = data[:,y,x]
@@ -167,7 +167,7 @@ for x, y in zip(xx[s1:s2], yy[s1:s2]):
         left_sd = mcmc[1] - mcmc[0]
         right_sd = mcmc[2] - mcmc[1]
         text_to_save = f'{params[i]} is -{left_sd:.5f} {center:.5f} +{right_sd:.5f}'
-        file_name = f'mcmc_fitting/results/mc_{x}_{y}.txt'
+        file_name = f'mcmc/results/mc_{x}_{y}.txt'
         with open(file_name, 'w') as file:
             file.write(text_to_save)
         
