@@ -2,7 +2,7 @@
 
 #SBATCH --job-name="velocity_fitting"
 #SBATCH --time=10:00:00
-#SBATCH --array=1-56
+#SBATCH --array=1-100
 #SBATCH --mem=2G
 #SBATCH --output=out-array_%A_%a.out  
 #SBATCH --error=err-array_%A_%a.err  
