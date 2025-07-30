@@ -15,7 +15,7 @@ echo "My SLURM_ARRAY_TASK_ID: " $SLURM_ARRAY_TASK_ID
 module load python
 conda activate emcee_fitting
 
-python3 mcmc_fitting/scripts/O3_1comp.py $SLURM_ARRAY_TASK_ID
+python3 mcmc/scripts/O3_1comp.py $SLURM_ARRAY_TASK_ID
 
 
 
