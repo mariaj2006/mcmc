@@ -185,12 +185,6 @@ for x, y in zip(xx[s1:s2], yy[s1:s2]):
     amp = mcmc_amp[1]
     print(z,sig,amp)
     
-    mod = O3_1comp(line,lsf).model_display(wave,z,sig,amp)
-    fig,ax = plt.subplots()
-    ax.plot(wave,mod)
-    ax.step(wave,dataspec,where='mid')
-    plt.show()
-    
     fits.writeto(checkpath, sampler.chain.astype(np.float32),overwrite=True)
 #np.save('bad_pixel.npy', bad_pixels)
 # plot the spectra of the pixels above the best fit params to see the accuracy visually
