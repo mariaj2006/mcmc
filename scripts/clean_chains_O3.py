@@ -24,11 +24,11 @@ path_prefix = '/carnegie/nobackup/scratch/msanchezrincon/'
 noise_scale_ratio = 1.32
 
 # replace with my data cube
-cubefile = '/Users/mariasanchezrincon/mcmc/data/vacuum_data_cube.fits'
+cubefile = 'mcmc/data/vacuum_data_cube.fits'
 wave, data, err = readcube(cubefile)
 err *= noise_scale_ratio
 # replace with my OIII SNR map
-flagmap = fits.getdata('/Users/mariasanchezrincon/mcmc/data/SNR_OIII.fits')
+flagmap = fits.getdata('mcmc/data/SNR_OIII.fits')
 yy, xx = np.where(flagmap>3)
 print(len(yy))
 
