@@ -156,8 +156,10 @@ for x, y in zip(xx, yy):
 
     fluxfit = np.concatenate((dataspec[mask1], dataspec[mask2]))
     errfit = np.concatenate((errspec[mask1], errspec[mask2]))
-
-    chains = fits.getdata(path_prefix + 'chains/mc_%d_%d.fits' % (x,y))
+    try:
+        chains = fits.getdata(path_prefix + 'chains/mc_%d_%d.fits' % (x,y))
+    except:
+        print(f'{x},{y} was not fit because chain never converged')
     
     nwalkers0 = chains.shape[0]
 
