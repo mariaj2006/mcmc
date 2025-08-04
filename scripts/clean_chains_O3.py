@@ -52,7 +52,12 @@ print(len(wavefit))
 line = [4960.295, 5008.240]
 z0 = 0.0477
 line_z = np.asarray(line)*(1+z0)
-lsf = get_muse_lsf(line_z)
+
+# lsf = get_muse_lsf(line_z) # what is the purpose of this? rather:
+l0, r0 = np.loadtxt('mcmc/data/muse_lsf.dat',unpack=True)
+r = interp1d(l0, r0)(line_z)
+lsf = 2.998e5/r
+
 func = O3_1comp(line, lsf).model
 ndim = 3
 n = len(wavefit)
