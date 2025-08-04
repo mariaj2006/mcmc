@@ -21,16 +21,16 @@ def readcube(cubefile):
     hdul.close()
     return wave, data, err
 
-path_prefix = '../OIIIonly_1comp/'
+path_prefix = '/carnegie/nobackup/scratch/msanchezrincon/'
 # ratio I found fir my cube
 noise_scale_ratio = 1.32
 
 # replace with my data cube
-cubefile = '../qsub_HRSDI_eso_deep_cont_sub_central_pix_replaced_smoothed_sig1.5_vac.fits'
+cubefile = '/Users/mariasanchezrincon/mcmc/data/vacuum_data_cube.fits'
 wave, data, err = readcube(cubefile)
 err *= noise_scale_ratio
 # replace with my OIII SNR map
-flagmap = fits.getdata('../OIII_mask3d_global_proj2d.fits')
+flagmap = fits.getdata('/Users/mariasanchezrincon/mcmc/data/SNR_OIII.fits')
 yy, xx = np.where(flagmap>3)
 print(len(yy))
 
@@ -50,7 +50,7 @@ print(len(wavefit))
 
 # replace z0
 line = [4960.295, 5008.240]
-z0 = 0.4936
+z0 = 0.0477
 line_z = np.asarray(line)*(1+z0)
 lsf = get_muse_lsf(line_z)
 func = O3_1comp(line, lsf).model
@@ -144,16 +144,16 @@ chain_quality = np.zeros(shape=(flagmap.shape[0], flagmap.shape[1]))
 
 for x, y in zip(xx, yy):
     print(x, y)
-    checkpath = path_prefix+'chains_cleaned/%d_%d_OIIIonly_1comp_chain.fits' % (x,y)
-    #if path.exists(checkpath): 
-        #continue
+    checkpath = path_prefix+'chains_cleaned/mc_%d_%d.fits' % (x,y)
+    if path.exists(checkpath): 
+        continue
     dataspec = data[:,y,x]
     errspec = err[:,y,x]
 
     fluxfit = np.concatenate((dataspec[mask1], dataspec[mask2]))
     errfit = np.concatenate((errspec[mask1], errspec[mask2]))
 
-    chains = fits.getdata(path_prefix+'chains/%d_%d_OIIIonly_1comp_chain.fits' 
+    chains = fits.getdata(path_prefix+'chains/mc_%d_%d.fits' 
                           % (x,y))
     nwalkers0 = chains.shape[0]
 
