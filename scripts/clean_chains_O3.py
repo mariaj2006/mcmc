@@ -144,7 +144,7 @@ chain_quality = np.zeros(shape=(flagmap.shape[0], flagmap.shape[1]))
 
 for x, y in zip(xx, yy):
     print(x, y)
-    checkpath = path_prefix+'chains_cleaned/mc_%d_%d.fits' % (x,y)
+    checkpath = path_prefix + '/chains_cleaned/mc_%d_%d.fits' % (x,y)
     if path.exists(checkpath): 
         continue
     dataspec = data[:,y,x]
@@ -153,8 +153,8 @@ for x, y in zip(xx, yy):
     fluxfit = np.concatenate((dataspec[mask1], dataspec[mask2]))
     errfit = np.concatenate((errspec[mask1], errspec[mask2]))
 
-    chains = fits.getdata(path_prefix+'chains/mc_%d_%d.fits' 
-                          % (x,y))
+    chains = fits.getdata(path_prefix + 'chains/mc_%d_%d.fits' % (x,y))
+    
     nwalkers0 = chains.shape[0]
 
     ar_all = accept_rate(chains)
