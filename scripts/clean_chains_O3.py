@@ -1,7 +1,7 @@
 import numpy as np 
 from astropy.io import fits
 # from cubelines.fitutils import get_lsf, convolve_lsf
-from cubelines.modelutils import O3_1comp, O3_2comp, O3_3comp, O3_4comp
+from model import O3_1comp
 from cubelines.modelutils import O2_1comp, O2_2comp
 from cubelines.modelutils import get_muse_lsf
 from astropy.constants import c
