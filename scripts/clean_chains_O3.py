@@ -160,6 +160,7 @@ for x, y in zip(xx, yy):
         chains = fits.getdata(path_prefix + 'chains/mc_%d_%d.fits' % (x,y))
     except:
         print(f'{x},{y} was not fit because chain never converged')
+        continue
     
     nwalkers0 = chains.shape[0]
 
