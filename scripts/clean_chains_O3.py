@@ -145,7 +145,7 @@ def lnlm_vec(fluxfit, errfit, model_vec):
     return lnlm
 
 chain_quality = np.zeros(shape=(flagmap.shape[0], flagmap.shape[1]))
-
+invalid = []
 for x, y in zip(xx, yy):
     print(x, y)
     checkpath = path_prefix + '/chains_cleaned/cleaned_mc_%d_%d.fits' % (x,y)
@@ -180,7 +180,13 @@ for x, y in zip(xx, yy):
         lnlm_map[i,:] = lnlm_vec(fluxfit, errfit, models250)
         minus_lnlm[i] = -np.mean(lnlm_vec(fluxfit, errfit, models250))
     walkerbest, samplebest = np.where(lnlm_map == np.max(lnlm_map))
-    popt = chains[walkerbest[0], -250 + samplebest[0], :]
+    try:
+        
+        popt = chains[walkerbest[0], -250 + samplebest[0], :]
+    except IndexError:
+        print(f"Invalid index for walkers and/or samplebest at ({x},{y})")
+        invalid.append([x,y])
+        continue
     best_fit[:,y,x] = popt
     v0_map[y,x] = (popt[0] - z0)/(1+z0)*clight
     # v1_map[y,x] = (popt[0] - z0)/(1+z0)*clight
@@ -207,7 +213,8 @@ for x, y in zip(xx, yy):
 
     chain_quality[y,x] = nwalkers0 - nwalkers2
     fits.writeto(checkpath, chains_good, overwrite=True)
-
+print("INVALID POINTS LIST:")
+print(invalid)
 fits.writeto(path_prefix+'OIIIonly_bestfit_1comp.fits', best_fit, overwrite=True)
 fits.writeto(path_prefix+'bic_1comp_v0.fits', bic_map, overwrite=True)
 fits.writeto(path_prefix+'vmap_OIIIonly_1comp.fits', v0_map, overwrite=True)
