@@ -10,7 +10,7 @@ clight = c.value/1e3 # in unit of angstrom/s
 
 from os import path
 
-array_num = int(sys.argv[1])
+##array_num = int(sys.argv[1])
 
 # open the cube and return essential data
 def readcube(cubefile):
@@ -43,9 +43,9 @@ print(len(yy))
 # skymask[(wave>8986)&(wave<8993)]=0
 
 # what should I replace these wavelength values for?
-wavemin1, wavemax1 = 7380,7422
+wavemin1, wavemax1 = 5180, 5210
 mask1 = (wave>wavemin1) & (wave<wavemax1)
-wavemin2, wavemax2 = 7445,7497
+wavemin2, wavemax2 = 5220, 5267
 mask2 = (wave>wavemin2) & (wave<wavemax2)
 wavefit = np.concatenate((wave[mask1], wave[mask2]))
 print(len(wavefit))
@@ -148,13 +148,13 @@ def lnlm_vec(fluxfit, errfit, model_vec):
     return lnlm
 
 
-s1, s2 = (array_num-1)*400, array_num*400
+##s1, s2 = (array_num-1)*400, array_num*400
 
-if s2>len(yy): s2 = len(yy)
+##if s2>len(yy): s2 = len(yy)
 
 chain_quality = np.zeros(shape=(flagmap.shape[0], flagmap.shape[1]))
 invalid = []
-for x, y in zip(xx[s1:s2], yy[s1:s2]):
+for x, y in zip(xx, yy):
     print(x, y)
     checkpath = path_prefix + '/chains_cleaned/cleaned_mc_%d_%d.fits' % (x,y)
     if path.exists(checkpath): 
