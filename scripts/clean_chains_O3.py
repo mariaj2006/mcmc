@@ -9,6 +9,8 @@ clight = c.value/1e3 # in unit of angstrom/s
 
 from os import path
 
+array_num = int(sys.argv[1])
+
 # open the cube and return essential data
 def readcube(cubefile):
     hdul = fits.open(cubefile)
@@ -144,12 +146,18 @@ def lnlm_vec(fluxfit, errfit, model_vec):
     lnlm = - np.sum(chi2, axis=1)
     return lnlm
 
+
+s1, s2 = (array_num-1)*400, array_num*400
+
+if s2>len(yy): s2 = len(yy)
+
 chain_quality = np.zeros(shape=(flagmap.shape[0], flagmap.shape[1]))
 invalid = []
-for x, y in zip(xx, yy):
+for x, y in zip(xx[s1:s2], yy[s1:s2]):
     print(x, y)
     checkpath = path_prefix + '/chains_cleaned/cleaned_mc_%d_%d.fits' % (x,y)
     if path.exists(checkpath): 
+        print(f"path ({x},{y}) already exisits") 
         continue
     dataspec = data[:,y,x]
     errspec = err[:,y,x]
