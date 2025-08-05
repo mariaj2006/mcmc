@@ -4,6 +4,7 @@ from astropy.io import fits
 from model import O3_1comp
 from astropy.constants import c
 from scipy.interpolate import interp1d
+import sys
 
 clight = c.value/1e3 # in unit of angstrom/s
 
