@@ -156,7 +156,7 @@ chain_quality = np.zeros(shape=(flagmap.shape[0], flagmap.shape[1]))
 invalid = []
 for x, y in zip(xx, yy):
     print(x, y)
-    checkpath = path_prefix + '/chains_cleaned/new_chains/cleaned_mc_%d_%d.fits' % (x,y)
+    checkpath = path_prefix + '/chains_cleaned/vel_chains/cleaned_mc_%d_%d.fits' % (x,y)
     if path.exists(checkpath): 
         print(f"path ({x},{y}) already exisits") 
         continue
@@ -224,11 +224,11 @@ for x, y in zip(xx, yy):
     fits.writeto(checkpath, chains_good, overwrite=True)
 print("INVALID POINTS LIST:")
 print(invalid)
-fits.writeto(path_prefix+'OIIIonly_bestfit_1comp.fits', best_fit, overwrite=True)
-fits.writeto(path_prefix+'bic_1comp_v0.fits', bic_map, overwrite=True)
-fits.writeto(path_prefix+'vmap_OIIIonly_1comp.fits', v0_map, overwrite=True)
+fits.writeto(path_prefix+'OIIIonly_bestfit_1comp_2.fits', best_fit, overwrite=True)
+fits.writeto(path_prefix+'bic_1comp_v0_2.fits', bic_map, overwrite=True)
+fits.writeto(path_prefix+'vmap_OIIIonly_1comp_2.fits', v0_map, overwrite=True)
 # fits.writeto(path_prefix+'vmap_OIIIonly_1comp_1.fits', v1_map, overwrite=True)
 # fits.writeto(path_prefix+'vmap_OIIIonly_1comp_2.fits', v2_map, overwrite=True)
 # fits.writeto(path_prefix+'vmap_OIIIonly_2comp_3.fits', v3_map, overwrite=True)
 # fits.writeto(path_prefix+'vmap_OIIIonly_2comp_4.fits', v4_map, overwrite=True)
-fits.writeto(path_prefix+'chain_quality.fits', chain_quality, overwrite=True)
+fits.writeto(path_prefix+'chain_quality_2.fits', chain_quality, overwrite=True)
