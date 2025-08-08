@@ -110,10 +110,10 @@ veldispmap_mean = np.mean(veldispmap_stack, axis=0)
 veldispmap_std = np.std(veldispmap_stack, axis=0)
 
 print('Populating velocity map takes %.1f mins' % ((time.time()-t0)/60.))
-fits.writeto(path_prefix + 'velmap_stack_OIII_1comp.fits'.format(dBIC_cut), velmap_stack, overwrite=True)
-fits.writeto(path_prefix + 'velmap_stack_OIII_1comp_median.fits'.format(dBIC_cut), velmap_med, overwrite=True)
-fits.writeto(path_prefix + 'velmap_stack_OIII_1comp_mean.fits'.format(dBIC_cut), velmap_mean, overwrite=True)
-fits.writeto(path_prefix + 'velmap_stack_OIII_1comp_std.fits'.format(dBIC_cut), velmap_std, overwrite=True)
+fits.writeto(path_prefix + 'velocity/velmap_stack_OIII_1comp.fits'.format(dBIC_cut), velmap_stack, overwrite=True)
+fits.writeto(path_prefix + 'velocity/velmap_stack_OIII_1comp_median.fits'.format(dBIC_cut), velmap_med, overwrite=True)
+fits.writeto(path_prefix + 'velocity/velmap_stack_OIII_1comp_mean.fits'.format(dBIC_cut), velmap_mean, overwrite=True)
+fits.writeto(path_prefix + 'velocity/velmap_stack_OIII_1comp_std.fits'.format(dBIC_cut), velmap_std, overwrite=True)
 
 print(velmap_stack.shape)
 
