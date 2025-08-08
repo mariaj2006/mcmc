@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name="convergence test"
-#SBATCH --time=1:00:00
+#SBATCH --time=10:00:00
 ##SBATCH --array=1-100
 #SBATCH --mem=3G
 #SBATCH --output=/carnegie/nobackup/scratch/msanchezrincon/slurm_output/chain/vel_out-array_%A_%a.out  
