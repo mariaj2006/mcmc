@@ -1,7 +1,7 @@
 import numpy as np
 from astropy.io import fits
 #from cubelines.modelutils import get_muse_lsf, convolve_lsf
-from mylib.turbulence import VSF
+#from mylib.turbulence import VSF
 from scipy.interpolate import interp1d
 import time
 from astropy.constants import c 
