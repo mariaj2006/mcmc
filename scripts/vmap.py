@@ -1,10 +1,14 @@
 import numpy as np
 from astropy.io import fits
-from cubelines.modelutils import get_muse_lsf, convolve_lsf
+#from cubelines.modelutils import get_muse_lsf, convolve_lsf
 from mylib.turbulence import VSF
 from scipy.interpolate import interp1d
 import time
 from astropy.constants import c 
+
+def convolve_lsf(sig, lsf):
+    a = 2*np.sqrt(2*np.log(2))
+    return np.sqrt(sig**2+(lsf/a)**2)
 
 clight = c.value/1e3 # km/s
 
