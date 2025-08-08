@@ -96,7 +96,7 @@ print(len(xx_val))
 # Monte Carlo sample of the velocity fields, using only one component fitting results
 t0 = time.time()
 for xi, yi in zip(xx_val, yy_val):
-    chain_file = path_prefix + '/chains_cleaned/vel_chains/cleaned_mc_%d_%d.fits' % (xi,yi)
+    chain_file = path_prefix + 'chains_cleaned/vel_chains/cleaned_mc_%d_%d.fits' % (xi,yi)
     chains = fits.getdata(chain_file)
     redshifts = chains[:, -250:, 0].flatten() # take the last -250 samples from all chains
     vels = (redshifts - z0)/(1 + z0) * clight
